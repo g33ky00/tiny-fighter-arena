@@ -20,7 +20,7 @@ export async function generateText(
     if (!apiKey)
         throw new Error("No API key. Add your Pollinations key to continue.");
 
-    const response = await fetch(`${BASE_URL}/text`, {
+    const response = await fetch(`${BASE_URL}/v1/chat/completions`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -43,17 +43,24 @@ export async function generateImage(prompt: string): Promise<string> {
     if (!apiKey)
         throw new Error("No API key. Add your Pollinations key to continue.");
 
-    const url = `${BASE_URL}/image/${encodeURIComponent(prompt)}`;
-    const response = await fetch(url, {
-        headers: { Authorization: `Bearer ${apiKey}` },
+    const response = await fetch(`${BASE_URL}/v1/images/generations`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${apiKey}`,
+        },
+        body: JSON.stringify({ prompt, model: "flux" }),
     });
 
     if (!response.ok) {
-        throw new Error(`Image generation failed: ${response.status}`);
+        const body = await response.text().catch(() => "");
+        throw new Error(`Image generation failed: ${response.status}: ${body}`);
     }
 
-    const blob = await response.blob();
-    return URL.createObjectURL(blob);
+    const data = (await response.json()) as { data: { url: string }[] };
+    const url = data.data?.[0]?.url;
+    if (!url) throw new Error("No image URL in response");
+    return url;
 }
 
 export async function generateAudio(text: string): Promise<string> {
@@ -61,13 +68,18 @@ export async function generateAudio(text: string): Promise<string> {
     if (!apiKey)
         throw new Error("No API key. Add your Pollinations key to continue.");
 
-    const url = `${BASE_URL}/audio/${encodeURIComponent(text)}`;
-    const response = await fetch(url, {
-        headers: { Authorization: `Bearer ${apiKey}` },
+    const response = await fetch(`${BASE_URL}/v1/audio/speech`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${apiKey}`,
+        },
+        body: JSON.stringify({ input: text, voice: "alloy" }),
     });
 
     if (!response.ok) {
-        throw new Error(`Audio generation failed: ${response.status}`);
+        const body = await response.text().catch(() => "");
+        throw new Error(`Audio generation failed: ${response.status}: ${body}`);
     }
 
     const blob = await response.blob();
