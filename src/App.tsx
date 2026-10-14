@@ -223,7 +223,7 @@ export default function App() {
             </header>
 
             {phase === "describe" && (
-                <FighterDesign onReady={handleFighterReady} />
+                <FighterDesign apiKey={apiKey} onReady={handleFighterReady} />
             )}
 
             {phase === "battle" && shared && fighters && (

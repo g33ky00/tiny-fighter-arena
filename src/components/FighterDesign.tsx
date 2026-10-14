@@ -1,10 +1,10 @@
 import { useState } from "react";
-import { getStoredApiKey } from "../api/byop.js";
 import { generateImage } from "../api/pollinations.js";
 import { generateCombatDNA } from "../engine/combatDNA.js";
 import type { CombatDNA } from "../engine/types.js";
 
 interface Props {
+    apiKey: string;
     onReady: (dna: CombatDNA, name: string, imageUrl: string) => void;
 }
 
@@ -26,7 +26,7 @@ const ELEMENT_COLOR: Record<string, string> = {
     tech: "#22d3ee",
 };
 
-export default function FighterDesign({ onReady }: Props) {
+export default function FighterDesign({ apiKey, onReady }: Props) {
     const [description, setDescription] = useState("");
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
@@ -37,7 +37,7 @@ export default function FighterDesign({ onReady }: Props) {
     } | null>(null);
 
     const handleGenerate = async () => {
-        if (!getStoredApiKey()) {
+        if (!apiKey) {
             setError("Add your Pollinations API key first (top right).");
             return;
         }
