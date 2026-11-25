@@ -1,5 +1,7 @@
 # Tiny Fighter Arena
 
+[![CI](https://github.com/g33ky00/tiny-fighter-arena/actions/workflows/ci-unified.yml/badge.svg)](https://github.com/g33ky00/tiny-fighter-arena/actions/workflows/ci-unified.yml)
+
 [![Made with pollinations.ai](https://raw.githubusercontent.com/pollinations/pollinations/main/packages/ui/src/brand/badge-made-with.svg)](https://pollinations.ai/?ref=badge)
 
 A browser game where players describe a fighter in one line and watch it battle. The AI parses the description into structured **CombatDNA** and runs a deterministic turn-based battle — so clever descriptions genuinely win.
@@ -49,3 +51,19 @@ npm run build
 ## License
 
 MIT
+
+## About
+
+Projet maintenu par g33ky00.
+
+## Structure
+
+Voir l'arborescence du dépôt.
+
+## Stack
+
+Voir le code source.
+
+## Contributing
+
+Les contributions sont les bienvenues via pull request.
