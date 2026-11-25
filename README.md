@@ -56,6 +56,8 @@ MIT
 
 Projet maintenu par g33ky00.
 
+Version 0.1.0
+
 ## Structure
 
 Voir l'arborescence du dépôt.
