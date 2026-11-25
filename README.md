@@ -1,5 +1,7 @@
 # Tiny Fighter Arena
 
+![CI](https://img.shields.io/github/actions/workflow/status/g33ky00/tiny-fighter-arena/ci-unified.yml?branch=main)
+
 [![CI](https://github.com/g33ky00/tiny-fighter-arena/actions/workflows/ci-unified.yml/badge.svg)](https://github.com/g33ky00/tiny-fighter-arena/actions/workflows/ci-unified.yml)
 
 [![Made with pollinations.ai](https://raw.githubusercontent.com/pollinations/pollinations/main/packages/ui/src/brand/badge-made-with.svg)](https://pollinations.ai/?ref=badge)
